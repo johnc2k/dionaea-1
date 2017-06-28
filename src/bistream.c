@@ -130,8 +130,8 @@ void bistream_data_add(struct bistream *bs, enum bistream_direction dir, void *d
 		bs->streams[dir].stream_chunks = g_list_append(bs->streams[dir].stream_chunks, sc);
 	}
 
-	g_mutex_unlock(bs->streams[dir].mutex);
-	g_mutex_unlock(bs->mutex);
+	g_mutex_unlock(&bs->streams[dir].mutex);
+	g_mutex_unlock(&bs->mutex);
 }
 
 void print_stream_chunk2(struct stream_chunk *sc)
@@ -255,7 +255,7 @@ int32_t bistream_get_stream(struct bistream *bs, enum bistream_direction dir, ui
 
 	if( !first || !last )
 	{
-		g_mutex_unlock(bs->streams[dir].mutex);
+		g_mutex_unlock(&bs->streams[dir].mutex);
 		return -1;
 	}
 

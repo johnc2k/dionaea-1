@@ -48,9 +48,9 @@ void refcount_inc(struct refcount *rc)
 
 void refcount_dec(struct refcount *rc)
 {
-	g_mutex_lock(rc->mutex);
+	g_mutex_lock(&rc->mutex);
 	rc->refs--;
-	g_mutex_unlock(rc->mutex);
+	g_mutex_unlock(&rc->mutex);
 }
 
 bool refcount_is_zero(struct refcount *rc)
